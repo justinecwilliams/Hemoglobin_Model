@@ -1,0 +1,43 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <title>3DMol.js Test</title>
+        <style>
+            .mol-container {
+                width: 60%;
+                height: 600px;
+                position: relative;
+            }
+        </style>
+    </head>
+
+
+        <script src="https://3Dmol.csb.pitt.edu/build/3Dmol-min.js"></script>
+    <div id="container-01" class="mol-container"></div>
+<body>
+<script>
+  let element = $('#container-01');
+  let config = { backgroundColor: 'white' };
+  let viewer = $3Dmol.createViewer( element, config );
+  let pdbUri = 'sn1_reaction_2.pdb';
+  jQuery.ajax( pdbUri, {
+    success: function(data) {
+      let v = viewer;
+      v.addModelsAsFrames( data, "pdb" );                       /* load data */
+      v.animate({interval: 100, step: 1 ,loop: "backAndForth"});
+      v.setStyle({sphere:{radius:0.4},stick:{radius:0.15}});  /* style all atoms */
+      v.zoomTo();                                      /* set camera */
+      v.render();                                      /* render scene */
+      v.zoom(1.2, 1000);                               /* slight zoom */
+    },
+    error: function(hdr, status, err) {
+      console.error( "Failed to load PDB " + pdbUri + ": " + err );
+    },
+  });
+</script>
+
+
+</body>
+
+</html>

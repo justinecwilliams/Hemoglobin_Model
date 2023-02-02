@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--
+      This is the page head - it contains info the browser uses to display the page
+      You won't see what's in the head in the page
+      Scroll down to the body element for the page content
+    -->
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="ar_icon.ico" />
+
+    <!--
+      This is an HTML comment
+      You can write text in a comment and the content won't be visible in the page
+    -->
+
+    <title>AR Molecule Viewer</title>
+
+    <!-- Import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- Import the webpage's javascript file -->
+    <script src="/script.js" defer></script>
+    <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+      <script src="https://3Dmol.csb.pitt.edu/build/3Dmol-min.js"></script>
+
+  </head>
+
+
+<body>
+
+        <!-- This is the start of content for our page -->
+        <h1 class="title" style="font-family=Arial">AR Molecule Viewer</h1>
+		Open a marker image on your computer, or print this marker image out. On your phone, open the "Augmented Reality Viewer" and point the camera at the marker.
+		        It may take a few seconds for the model to load.
+        <br>
+        <br>
+
+            <!-- HTML !-->
+		<button>
+		<a href="enter_ar.html" style="text-decoration:none" >Augmented Reality Viewer </a>
+		</button>
+        <br>
+        <br>
+
+        <!--View models in browser instead:<br>
+        <button>
+		<a href="browser_view.html" style="text-decoration:none" >3DMol Viewer </a>
+		</button>
+		-->
+
+      <br>
+<table>
+    <tr>
+
+        <td>
+            <a  href="hemoglobin_marker.html" style="text-decoration:none" >Hemoglobin Marker </a>
+
+        </td>
+        <td>
+       <!--       <div style="height: 200px; width: 200px; position: relative;" class='viewer_3Dmoljs' data-href='hemoglobin_model.pdb'
+      data-select1='chain:A' data-style1='cartoon:color=spectrum' data-select2='resn:HEM' data-style2='stick'
+      data-select3='resn:OXY' data-style3='sphere'></div> -->
+            <div class="viewer_container">
+
+
+ <div id="hemoglobin_reaction" class="mol_container" style="max-height: 25vh; max-width: 30vw; height: 300px; width: 300px; position: relative;">
+     <canvas id="undefined" style="max-height: 25vh; max-width: 30vw; height: 300px; width: 300px; position: relative;" ></canvas>
+     </div>
+    </div>
+     <script>
+
+	$(document).ready(function(){
+		$.get("hemoglobin_model.pdb", function(data) {
+
+			wid = $3Dmol.createViewer("hemoglobin_reaction");
+
+			set = {
+				interval: 30,
+				animation: 'backAndForth',
+			}
+			wid.addModelsAsFrames(data, "pdb");
+			wid.setBackgroundColor(0xF6F6F6);
+			wid.setStyle({chain:'A'},{cartoon:{color:'spectrum'}});
+			wid.setStyle({resn:'HEM'},{stick:{}})
+			wid.setStyle({resn:'OXY'},{sphere:{}})
+			wid.setStyle({elem:'Fe'},{sphere:{}})
+			wid.setStyle({resi:['42','58','64','87','104']},{stick:{colorscheme:"cyanCarbon"}})
+			wid.zoomTo();
+			wid.render();
+			wid.animate({'loop': set['animation'], 'interval': set['interval']});
+
+		});
+	});
+     </script>
+
+
+        </td>
+        <td>Oxygenation of hemoglobin</td>
+        </tr>
+
+    <tr>
+
+        <td><a href="sn1_marker_retention.html" style="text-decoration:none" >SN1 Marker (Retention) </a></td>
+        <td>
+ <div class="viewer_container">
+ <div id="sn1_reaction_retention" class="mol_container" style="max-height: 25vh; max-width: 30vw; height: 300px; width: 300px; position: relative;">
+     <canvas id="undefined1" style="max-height: 25vh; max-width: 30vw; height: 300px; width: 300px; position: relative;" ></canvas>
+     </div>
+    </div>
+     <script>
+
+	$(document).ready(function(){
+		$.get("sn1_reaction_2.pdb", function(data) {
+
+			wid = $3Dmol.createViewer("sn1_reaction_retention");
+
+			set = {
+				interval: 30,
+				animation: 'backAndForth',
+			}
+			wid.addModelsAsFrames(data, "pdb");
+			wid.setBackgroundColor(0xF6F6F6);
+			wid.setStyle({}, {stick:{radius: 0.15}, sphere: {scale: 0.2}});
+			wid.zoomTo();
+			wid.render();
+			wid.animate({'loop': set['animation'], 'interval': set['interval']});
+
+		});
+	});
+     </script>
+        </td>
+        <td>
+            SN1 reaction, where (R)-2-bromobutane reacts with S-H to create (2S)-butane-2-thiol (retention product)
+        </td>
+        </tr>
+
+    <tr>
+        <td>
+            <a href="sn1_marker_inversion.html" style="text-decoration:none" >SN1 Marker (Inversion) </a>
+        </td>
+
+        <td>
+ <div class="viewer_container">
+ <div id="sn1_reaction_inversion" class="mol_container" style="max-height: 25vh; max-width: 30vw; height: 300px; width: 300px; position: relative;">
+     <canvas id="undefined2" style="max-height: 25vh; max-width: 30vw; height: 300px; width: 300px; position: relative;" ></canvas>
+     </div>
+    </div>
+     <script>
+
+	$(document).ready(function(){
+		$.get("sn1_reaction_1.pdb", function(data) {
+
+			wid = $3Dmol.createViewer("sn1_reaction_inversion");
+
+			set = {
+				interval: 30,
+				animation: 'backAndForth',
+			}
+			wid.addModelsAsFrames(data, "pdb");
+			wid.setBackgroundColor(0xF6F6F6);
+			wid.setStyle({}, {stick:{radius: 0.15}, sphere: {scale: 0.2}});
+			wid.zoomTo();
+			wid.render();
+			wid.animate({'loop': set['animation'], 'interval': set['interval']});
+
+		});
+	});
+     </script>
+        </td>
+                <td>
+        SN1 reaction, where (R)-2-bromobutane reacts with S-H to create (2S)-butane-2-thiol (inversion product)
+        </td>
+        </tr>
+
+            <tr>
+                <td>
+                    <a href="sn2_marker.html" style="text-decoration:none" >SN2 Animation </a>
+
+                </td>
+        <td>
+ <div class="viewer_container">
+ <div id="sn2_reaction" class="mol_container" style="max-height: 25vh; max-width: 30vw; height: 300px; width: 300px; position: relative;">
+     <canvas id="undefined3" style="max-height: 25vh; max-width: 30vw; height: 300px; width: 300px; position: relative;" ></canvas>
+     </div>
+    </div>
+     <script>
+
+	$(document).ready(function(){
+		$.get("sn2_reaction.pdb", function(data) {
+
+			wid = $3Dmol.createViewer("sn2_reaction");
+
+			set = {
+				interval: 30,
+				animation: 'backAndForth',
+			}
+			wid.addModelsAsFrames(data, "pdb");
+			wid.setBackgroundColor(0xF6F6F6);
+			wid.setStyle({}, {stick:{radius: 0.15}, sphere: {scale: 0.2}});
+			wid.zoomTo();
+			wid.render();
+			wid.animate({'loop': set['animation'], 'interval': set['interval']});
+
+		});
+	});
+     </script>
+        </td>
+                <td>SN2 reaction, where (R)-2-bromobutane reacts with I- in a backside attack</td>
+    </tr>
+
+ </table>
+
+</body>
+
+</html>

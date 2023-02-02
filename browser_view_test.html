@@ -1,0 +1,88 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <title>3DMol.js Test</title>
+        <style>
+            .mol-container {
+                width: 60%;
+                height: 500px;
+                position: relative;
+            }
+        </style>
+    </head>
+
+
+        <script src="https://3Dmol.csb.pitt.edu/build/3Dmol-min.js"></script>
+
+<body>
+<table>
+    <tr>
+        <td>
+        <a href="hemoglobin_marker.html" style="text-decoration:none" >Hemoglobin Marker </a>
+        : Animation showing the oxygenation of hemoglobin:
+
+<div class="viewer_container">
+ <div id="reaction1" class="mol_container" style="height: 300px; width: 400px; position: relative;">
+     <canvas id="undefined" style="height: 300px; width: 400px; position: relative;" ></canvas>
+     </div>
+    </div>
+     <script>
+
+	$(document).ready(function(){
+		$.get("sn2_reaction.pdb", function(data) {
+
+			wid = $3Dmol.createViewer("reaction1");
+
+			set = {
+				interval: 30,
+				animation: 'backAndForth',
+			}
+			wid.addModelsAsFrames(data, "pdb");
+			wid.setBackgroundColor(0xF8F8F8);
+			wid.setStyle({}, {stick:{radius: 0.15}, sphere: {scale: 0.2}});
+
+			wid.zoomTo();
+			wid.render();
+			wid.animate({'loop': set['animation'], 'interval': set['interval']});
+
+		});
+	});
+     </script>
+        </td>
+
+        </tr>
+    <tr>
+        <td>
+<div class="viewer_container" >
+ <div id="reaction2" class="mol_container" style="height: 300px; width: 400px; position: relative;">
+        <canvas id="undefined1" style="height: 300px; width: 400px; position: relative;"" ></canvas>
+    </div>
+    </div>
+     <script>
+
+	$(document).ready(function(){
+		$.get("sn1_reaction_1.pdb", function(data) {
+
+			wid = $3Dmol.createViewer("reaction2");
+
+			set = {
+				interval: 30,
+				animation: 'backAndForth',
+			}
+			wid.addModelsAsFrames(data, "pdb");
+			wid.setBackgroundColor(0xF8F8F8);
+			wid.setStyle({}, {stick:{radius: 0.15}, sphere: {scale: 0.2}});
+
+			wid.zoomTo();
+			wid.render();
+			wid.animate({'loop': set['animation'], 'interval': set['interval']});
+
+		});
+	});
+     </script>
+        </td>
+</tr>
+    </table>
+ </body>
+</html>
